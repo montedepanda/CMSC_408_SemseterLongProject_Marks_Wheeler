@@ -1,0 +1,11 @@
+---
+title: "Football Data Project"
+format: html
+---
+
+# Design Concept
+Creating a new system for defensive point scoring for a system such as fantasy that can look at defensive effiency in more terms than just interceptions, fumble recovery, yards against and points scored. We would like to implement a new system that involves injury/ replacements and offensive fault. We will take certain data that already exists. We will use Madden overalls to determine overall defensive efficieny.
+
+## Chens Design Example for defensive Effiency
+
+
