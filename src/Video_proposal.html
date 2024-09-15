@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.56">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Football Data Project</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="Video_proposal_files/libs/clipboard/clipboard.min.js"></script>
+<script src="Video_proposal_files/libs/quarto-html/quarto.js"></script>
+<script src="Video_proposal_files/libs/quarto-html/popper.min.js"></script>
+<script src="Video_proposal_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="Video_proposal_files/libs/quarto-html/anchor.min.js"></script>
+<link href="Video_proposal_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="Video_proposal_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="Video_proposal_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="Video_proposal_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="Video_proposal_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Football Data Project</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="defense-design-concept" class="level1">
+<h1>Defense Design Concept</h1>
+<p>Creating a new system for defensive point scoring for a system such as fantasy that can look at defensive effiency in more terms than just interceptions, fumble recovery, yards against and points scored. We would like to implement a new system that involves injury/ replacements and offensive fault. We will take certain data that already exists. We will use Madden overalls to determine overall defensive efficieny.</p>
+<pre><code>There are a few needs for this. In fantasy football the denfenses are pretty much a crap shoot. Outside of the top 3 defenses in the league the rest are pretty wish-washy on a week to week basis. Many people "stream" defenses which means every week you look for preferable match ups in defenses so you try and get a new one each week. This problem could be solved by adding a metric to defenses that accounts for injury and overperformance. That way you not only get punished when the defense underperforms but you get benefits when the overall of the defense is low and they overperform. </code></pre>
+<section id="chens-design-example-for-defensive-effiency" class="level2">
+<h2 class="anchored" data-anchor-id="chens-design-example-for-defensive-effiency">Chens Design Example for defensive Effiency</h2>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<svg width="672" height="480" viewbox="0.00 0.00 689.64 684.58" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" style="; max-width: none; max-height: none">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 680.58)">
+<title>ER</title>
+<polygon fill="black" stroke="transparent" points="-4,4 -4,-680.58 685.64,-680.58 685.64,4 -4,4"></polygon>
+<text text-anchor="middle" x="340.82" y="-654.58" font-family="Helvetica,Arial,sans-serif" font-size="20.00" fill="yellow">Defensive Scoring System</text>
+<!-- team -->
+<g id="node1" class="node">
+<title>team</title>
+<polygon fill="yellow" stroke="yellow" points="445.31,-446.83 391.31,-446.83 391.31,-410.83 445.31,-410.83 445.31,-446.83"></polygon>
+<text text-anchor="middle" x="418.31" y="-424.63" font-family="Times,serif" font-size="14.00">team</text>
+</g>
+<!-- Belongs to Team -->
+<g id="node27" class="node">
+<title>Belongs to Team</title>
+<polygon fill="yellow" stroke="yellow" points="370.51,-372.98 261.68,-354.98 370.51,-336.98 479.33,-354.98 370.51,-372.98"></polygon>
+<text text-anchor="middle" x="370.51" y="-350.78" font-family="Times,serif" font-size="14.00">Belongs to Team</text>
+</g>
+<!-- team&#45;&#45;Belongs to Team -->
+<g id="edge24" class="edge">
+<title>team--Belongs to Team</title>
+<path fill="none" stroke="yellow" d="M406.5,-410.58C398.76,-398.62 388.72,-383.11 381.21,-371.52"></path>
+</g>
+<!-- Has Team Stats -->
+<g id="node28" class="node">
+<title>Has Team Stats</title>
+<polygon fill="yellow" stroke="yellow" points="484.79,-503.46 383.65,-485.46 484.79,-467.46 585.94,-485.46 484.79,-503.46"></polygon>
+<text text-anchor="middle" x="484.79" y="-481.26" font-family="Times,serif" font-size="14.00">Has Team Stats</text>
+</g>
+<!-- team&#45;&#45;Has Team Stats -->
+<g id="edge26" class="edge">
+<title>team--Has Team Stats</title>
+<path fill="none" stroke="yellow" d="M439.71,-447.06C448.52,-454.56 458.6,-463.15 466.99,-470.3"></path>
+</g>
+<!-- playerStats -->
+<g id="node2" class="node">
+<title>playerStats</title>
+<polygon fill="yellow" stroke="yellow" points="188.69,-296.09 110.27,-296.09 110.27,-260.09 188.69,-260.09 188.69,-296.09"></polygon>
+<text text-anchor="middle" x="149.48" y="-273.89" font-family="Times,serif" font-size="14.00">playerStats</text>
+</g>
+<!-- player -->
+<g id="node3" class="node">
+<title>player</title>
+<polygon fill="yellow" stroke="yellow" points="355.07,-287.4 301.07,-287.4 301.07,-251.4 355.07,-251.4 355.07,-287.4"></polygon>
+<text text-anchor="middle" x="328.07" y="-265.2" font-family="Times,serif" font-size="14.00">player</text>
+</g>
+<!-- Has Stats -->
+<g id="node25" class="node">
+<title>Has Stats</title>
+<polygon fill="yellow" stroke="yellow" points="238.09,-298.37 171.45,-280.37 238.09,-262.37 304.73,-280.37 238.09,-298.37"></polygon>
+<text text-anchor="middle" x="238.09" y="-276.17" font-family="Times,serif" font-size="14.00">Has Stats</text>
+</g>
+<!-- player&#45;&#45;Has Stats -->
+<g id="edge20" class="edge">
+<title>player--Has Stats</title>
+<path fill="none" stroke="yellow" d="M300.59,-272.75C295.42,-273.38 289.88,-274.06 284.32,-274.74"></path>
+</g>
+<!-- Has Injury -->
+<g id="node26" class="node">
+<title>Has Injury</title>
+<polygon fill="yellow" stroke="yellow" points="368.22,-195.12 294.45,-177.12 368.22,-159.12 442,-177.12 368.22,-195.12"></polygon>
+<text text-anchor="middle" x="368.22" y="-172.92" font-family="Times,serif" font-size="14.00">Has Injury</text>
+</g>
+<!-- player&#45;&#45;Has Injury -->
+<g id="edge22" class="edge">
+<title>player--Has Injury</title>
+<path fill="none" stroke="yellow" d="M336,-251.17C343.32,-234.36 354.07,-209.64 361.11,-193.46"></path>
+</g>
+<!-- injury -->
+<g id="node4" class="node">
+<title>injury</title>
+<polygon fill="yellow" stroke="yellow" points="433.46,-116.67 379.46,-116.67 379.46,-80.67 433.46,-80.67 433.46,-116.67"></polygon>
+<text text-anchor="middle" x="406.46" y="-94.47" font-family="Times,serif" font-size="14.00">injury</text>
+</g>
+<!-- teamStats -->
+<g id="node5" class="node">
+<title>teamStats</title>
+<polygon fill="yellow" stroke="yellow" points="576.17,-566.57 505.29,-566.57 505.29,-530.57 576.17,-530.57 576.17,-566.57"></polygon>
+<text text-anchor="middle" x="540.73" y="-544.37" font-family="Times,serif" font-size="14.00">teamStats</text>
+</g>
+<!-- teamID -->
+<g id="node6" class="node">
+<title>teamID</title>
+<ellipse fill="yellow" stroke="yellow" cx="387.93" cy="-500" rx="39.99" ry="18"></ellipse>
+<text text-anchor="middle" x="387.93" y="-495.8" font-family="Times,serif" font-size="14.00">teamID</text>
+</g>
+<!-- teamID&#45;&#45;team -->
+<g id="edge1" class="edge">
+<title>teamID--team</title>
+<path fill="none" stroke="yellow" d="M395.6,-482.04C400.17,-471.34 405.95,-457.78 410.54,-447.04"></path>
+</g>
+<!-- teamName -->
+<g id="node7" class="node">
+<title>teamName</title>
+<ellipse fill="yellow" stroke="yellow" cx="348.06" cy="-477.06" rx="52.72" ry="18"></ellipse>
+<text text-anchor="middle" x="348.06" y="-472.86" font-family="Times,serif" font-size="14.00">teamName</text>
+</g>
+<!-- teamName&#45;&#45;team -->
+<g id="edge2" class="edge">
+<title>teamName--team</title>
+<path fill="none" stroke="yellow" d="M371.85,-460.73C378.22,-456.36 385.14,-451.61 391.65,-447.14"></path>
+</g>
+<!-- teamOverall -->
+<g id="node8" class="node">
+<title>teamOverall</title>
+<ellipse fill="yellow" stroke="yellow" cx="491.01" cy="-395.35" rx="58.52" ry="18"></ellipse>
+<text text-anchor="middle" x="491.01" y="-391.15" font-family="Times,serif" font-size="14.00">teamOverall</text>
+</g>
+<!-- teamOverall&#45;&#45;team -->
+<g id="edge3" class="edge">
+<title>teamOverall--team</title>
+<path fill="none" stroke="yellow" d="M458.07,-410.53C453.86,-412.46 449.59,-414.43 445.49,-416.32"></path>
+</g>
+<!-- adjustedOverall -->
+<g id="node9" class="node">
+<title>adjustedOverall</title>
+<ellipse fill="yellow" stroke="yellow" cx="401.34" cy="-18" rx="72.35" ry="18"></ellipse>
+<text text-anchor="middle" x="401.34" y="-13.8" font-family="Times,serif" font-size="14.00">adjustedOverall</text>
+</g>
+<!-- adjustedOverall&#45;&#45;injury -->
+<g id="edge4" class="edge">
+<title>adjustedOverall--injury</title>
+<path fill="none" stroke="yellow" d="M402.5,-36.31C403.34,-49.51 404.47,-67.25 405.3,-80.44"></path>
+</g>
+<!-- injuryReplacement -->
+<g id="node10" class="node">
+<title>injuryReplacement</title>
+<ellipse fill="yellow" stroke="yellow" cx="492.21" cy="-98.32" rx="84.52" ry="18"></ellipse>
+<text text-anchor="middle" x="492.21" y="-94.12" font-family="Times,serif" font-size="14.00">injuryReplacement</text>
+</g>
+<!-- injuryReplacement&#45;&#45;injury -->
+<g id="edge5" class="edge">
+<title>injuryReplacement--injury</title>
+<path fill="none" stroke="yellow" d="M407.67,-98.67C407.28,-98.67 406.97,-98.67 406.77,-98.67"></path>
+</g>
+<!-- injuryID -->
+<g id="node11" class="node">
+<title>injuryID</title>
+<ellipse fill="yellow" stroke="yellow" cx="465.73" cy="-43.32" rx="44.09" ry="18"></ellipse>
+<text text-anchor="middle" x="465.73" y="-39.12" font-family="Times,serif" font-size="14.00">injuryID</text>
+</g>
+<!-- injuryID&#45;&#45;injury -->
+<g id="edge6" class="edge">
+<title>injuryID--injury</title>
+<path fill="none" stroke="yellow" d="M447.95,-59.93C440.99,-66.42 432.99,-73.89 425.88,-80.53"></path>
+</g>
+<!-- weeksInjured -->
+<g id="node12" class="node">
+<title>weeksInjured</title>
+<ellipse fill="yellow" stroke="yellow" cx="344.2" cy="-40.18" rx="63.11" ry="18"></ellipse>
+<text text-anchor="middle" x="344.2" y="-35.98" font-family="Times,serif" font-size="14.00">weeksInjured</text>
+</g>
+<!-- weeksInjured&#45;&#45;injury -->
+<g id="edge7" class="edge">
+<title>weeksInjured--injury</title>
+<path fill="none" stroke="yellow" d="M362.54,-57.41C370.29,-64.69 379.32,-73.17 387.16,-80.55"></path>
+</g>
+<!-- playerID -->
+<g id="node13" class="node">
+<title>playerID</title>
+<ellipse fill="yellow" stroke="yellow" cx="292.61" cy="-218.97" rx="45.21" ry="18"></ellipse>
+<text text-anchor="middle" x="292.61" y="-214.77" font-family="Times,serif" font-size="14.00">playerID</text>
+</g>
+<!-- playerID&#45;&#45;player -->
+<g id="edge8" class="edge">
+<title>playerID--player</title>
+<path fill="none" stroke="yellow" d="M304.81,-236.32C308.18,-241.11 311.84,-246.32 315.24,-251.15"></path>
+</g>
+<!-- playerName -->
+<g id="node14" class="node">
+<title>playerName</title>
+<ellipse fill="yellow" stroke="yellow" cx="398.06" cy="-242.78" rx="58.45" ry="18"></ellipse>
+<text text-anchor="middle" x="398.06" y="-238.58" font-family="Times,serif" font-size="14.00">playerName</text>
+</g>
+<!-- playerName&#45;&#45;player -->
+<g id="edge9" class="edge">
+<title>playerName--player</title>
+<path fill="none" stroke="yellow" d="M361.02,-256.87C359.05,-257.62 357.09,-258.36 355.17,-259.1"></path>
+</g>
+<!-- injuryStatus -->
+<g id="node15" class="node">
+<title>injuryStatus</title>
+<ellipse fill="yellow" stroke="yellow" cx="379.18" cy="-285.96" rx="57.93" ry="18"></ellipse>
+<text text-anchor="middle" x="379.18" y="-281.76" font-family="Times,serif" font-size="14.00">injuryStatus</text>
+</g>
+<!-- injuryStatus&#45;&#45;player -->
+<g id="edge10" class="edge">
+<title>injuryStatus--player</title>
+<path fill="none" stroke="yellow" d="M338.91,-272.91C338.81,-272.88 338.71,-272.85 338.62,-272.82"></path>
+</g>
+<!-- interceptions -->
+<g id="node16" class="node">
+<title>interceptions</title>
+<ellipse fill="yellow" stroke="yellow" cx="86.27" cy="-222.15" rx="60.83" ry="18"></ellipse>
+<text text-anchor="middle" x="86.27" y="-217.95" font-family="Times,serif" font-size="14.00">interceptions</text>
+</g>
+<!-- interceptions&#45;&#45;playerStats -->
+<g id="edge11" class="edge">
+<title>interceptions--playerStats</title>
+<path fill="none" stroke="yellow" d="M105.58,-239.24C112.99,-245.8 121.46,-253.29 128.97,-259.94"></path>
+</g>
+<!-- tackles -->
+<g id="node17" class="node">
+<title>tackles</title>
+<ellipse fill="yellow" stroke="yellow" cx="131.74" cy="-196.08" rx="37.7" ry="18"></ellipse>
+<text text-anchor="middle" x="131.74" y="-191.88" font-family="Times,serif" font-size="14.00">tackles</text>
+</g>
+<!-- tackles&#45;&#45;playerStats -->
+<g id="edge12" class="edge">
+<title>tackles--playerStats</title>
+<path fill="none" stroke="yellow" d="M135.67,-214.28C138.62,-227.87 142.62,-246.36 145.55,-259.94"></path>
+</g>
+<!-- fumbleR -->
+<g id="node18" class="node">
+<title>fumbleR</title>
+<ellipse fill="yellow" stroke="yellow" cx="132.59" cy="-358.93" rx="44.66" ry="18"></ellipse>
+<text text-anchor="middle" x="132.59" y="-354.73" font-family="Times,serif" font-size="14.00">fumbleR</text>
+</g>
+<!-- fumbleR&#45;&#45;playerStats -->
+<g id="edge13" class="edge">
+<title>fumbleR--playerStats</title>
+<path fill="none" stroke="yellow" d="M136.34,-340.99C139.12,-327.69 142.89,-309.62 145.68,-296.26"></path>
+</g>
+<!-- passDeflection -->
+<g id="node19" class="node">
+<title>passDeflection</title>
+<ellipse fill="yellow" stroke="yellow" cx="68.42" cy="-278.68" rx="68.34" ry="18"></ellipse>
+<text text-anchor="middle" x="68.42" y="-274.48" font-family="Times,serif" font-size="14.00">passDeflection</text>
+</g>
+<!-- passDeflection&#45;&#45;playerStats -->
+<g id="edge14" class="edge">
+<title>passDeflection--playerStats</title>
+<path fill="none" stroke="yellow" d="M137.17,-278.18C137.29,-278.18 137.4,-278.18 137.52,-278.18"></path>
+</g>
+<!-- tackleForLoss -->
+<g id="node20" class="node">
+<title>tackleForLoss</title>
+<ellipse fill="yellow" stroke="yellow" cx="86.31" cy="-334.83" rx="66" ry="18"></ellipse>
+<text text-anchor="middle" x="86.31" y="-330.63" font-family="Times,serif" font-size="14.00">tackleForLoss</text>
+</g>
+<!-- tackleForLoss&#45;&#45;playerStats -->
+<g id="edge15" class="edge">
+<title>tackleForLoss--playerStats</title>
+<path fill="none" stroke="yellow" d="M105.61,-317.49C113.15,-310.72 121.81,-302.94 129.43,-296.1"></path>
+</g>
+<!-- pointsAgainst -->
+<g id="node21" class="node">
+<title>pointsAgainst</title>
+<ellipse fill="yellow" stroke="yellow" cx="558.59" cy="-626.58" rx="64.88" ry="18"></ellipse>
+<text text-anchor="middle" x="558.59" y="-622.38" font-family="Times,serif" font-size="14.00">pointsAgainst</text>
+</g>
+<!-- pointsAgainst&#45;&#45;teamStats -->
+<g id="edge16" class="edge">
+<title>pointsAgainst--teamStats</title>
+<path fill="none" stroke="yellow" d="M554.44,-608.49C551.58,-595.98 547.78,-579.39 544.91,-566.84"></path>
+</g>
+<!-- yardsAgainst -->
+<g id="node22" class="node">
+<title>yardsAgainst</title>
+<ellipse fill="yellow" stroke="yellow" cx="495.18" cy="-623.62" rx="61.99" ry="18"></ellipse>
+<text text-anchor="middle" x="495.18" y="-619.42" font-family="Times,serif" font-size="14.00">yardsAgainst</text>
+</g>
+<!-- yardsAgainst&#45;&#45;teamStats -->
+<g id="edge17" class="edge">
+<title>yardsAgainst--teamStats</title>
+<path fill="none" stroke="yellow" d="M505.97,-605.83C513.13,-594.04 522.49,-578.62 529.7,-566.75"></path>
+</g>
+<!-- passYardsPP -->
+<g id="node23" class="node">
+<title>passYardsPP</title>
+<ellipse fill="yellow" stroke="yellow" cx="615.17" cy="-577.21" rx="61.44" ry="18"></ellipse>
+<text text-anchor="middle" x="615.17" y="-573.01" font-family="Times,serif" font-size="14.00">passYardsPP</text>
+</g>
+<!-- passYardsPP&#45;&#45;teamStats -->
+<g id="edge18" class="edge">
+<title>passYardsPP--teamStats</title>
+<path fill="none" stroke="yellow" d="M577.51,-562.72C577.08,-562.56 576.65,-562.39 576.21,-562.22"></path>
+</g>
+<!-- rushYardsPP -->
+<g id="node24" class="node">
+<title>rushYardsPP</title>
+<ellipse fill="yellow" stroke="yellow" cx="620.17" cy="-513.16" rx="61.44" ry="18"></ellipse>
+<text text-anchor="middle" x="620.17" y="-508.96" font-family="Times,serif" font-size="14.00">rushYardsPP</text>
+</g>
+<!-- rushYardsPP&#45;&#45;teamStats -->
+<g id="edge19" class="edge">
+<title>rushYardsPP--teamStats</title>
+<path fill="none" stroke="yellow" d="M586.02,-528.38C582.74,-529.85 579.41,-531.33 576.12,-532.8"></path>
+</g>
+<!-- Has Stats&#45;&#45;playerStats -->
+<g id="edge21" class="edge">
+<title>Has Stats--playerStats</title>
+<path fill="none" stroke="yellow" d="M177.03,-278.8C176.91,-278.8 176.79,-278.8 176.67,-278.79"></path>
+</g>
+<!-- Has Injury&#45;&#45;injury -->
+<g id="edge23" class="edge">
+<title>Has Injury--injury</title>
+<path fill="none" stroke="yellow" d="M376.14,-160.86C382.4,-148.03 391.13,-130.13 397.61,-116.83"></path>
+</g>
+<!-- Belongs to Team&#45;&#45;player -->
+<g id="edge25" class="edge">
+<title>Belongs to Team--player</title>
+<path fill="none" stroke="yellow" d="M362.12,-338.08C354.88,-323.46 344.43,-302.4 337.03,-287.46"></path>
+</g>
+<!-- Has Team Stats&#45;&#45;teamStats -->
+<g id="edge27" class="edge">
+<title>Has Team Stats--teamStats</title>
+<path fill="none" stroke="yellow" d="M498.62,-501.06C506.51,-509.97 516.45,-521.18 524.68,-530.47"></path>
+</g>
+</g>
+</svg>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<section id="section" class="level3">
+<h3 class="anchored" data-anchor-id="section"></h3>
+</section>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

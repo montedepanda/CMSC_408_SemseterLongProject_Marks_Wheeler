@@ -3,9 +3,67 @@ title: "Football Data Project"
 format: html
 ---
 
-# Design Concept
-Creating a new system for defensive point scoring for a system such as fantasy that can look at defensive effiency in more terms than just interceptions, fumble recovery, yards against and points scored. We would like to implement a new system that involves injury/ replacements and offensive fault. We will take certain data that already exists. We will use Madden overalls to determine overall defensive efficieny.
+# Defense Design Concept
+Creating a new system for defensive point scoring for a system such as fantasy that can look at defensive effiency in more terms than just interceptions, fumble recovery, yards against and points scored. We would like to implement a new system that involves injury/ replacements and offensive fault. We will take certain data that already exists. We will use Madden overalls to determine overall defensive efficieny. 
+
+## Needs and Motivations
+
+There are a few needs for this. In fantasy football the denfenses are pretty much a crap shoot. Outside of the top 3 defenses in the league the rest are pretty wish-washy on a week to week basis. Many people "stream" defenses which means every week you look for preferable match ups in defenses so you try and get a new one each week. This problem could be solved by adding a metric to defenses that accounts for injury and overperformance. That way you not only get punished when the defense underperforms but you get benefits when the overall of the defense is low and they overperform. Our motivation is that we both play fantasy football and defenses are the most frustrating part of the equation if you play in a standard league. We will be following the Pittsburgh Steelers and the Kansas City Chiefs as part of the project because those are our two favorite teams and if we look at two teams instead of one we can get a sense of if it is really working or not.
+
 
 ## Chens Design Example for defensive Effiency
+```{dot}
+graph ER {
+    fontname="Helvetica,Arial,sans-serif"
+    fontsize=20;
+    fontcolor= yellow;
+    label="Defensive Scoring System";
+    labelloc="t";
+    labeljust="c";
+
+    bgcolor=black;
+    layout =neato;
+    
+   node [shape = box, style=filled, color= yellow];
+   team; playerStats; player; injury; teamStats;
+
+   node [shape=ellipse, style=filled, color=yellow];
+   teamID, teamName, teamOverall, adjustedOverall, injuryReplacement,injuryID, weeksInjured, playerID, playerName, injuryStatus, interceptions, tackles, fumbleR, passDeflection, tackleForLoss; pointsAgainst, yardsAgainst, passYardsPP, rushYardsPP;
+
+   node [shape=diamond, style=filled, color=yellow];
+   "Has Stats", "Has Injury", playerID; "Belongs to Team", "Has Team Stats";
+
+   teamID-- team [color = yellow];
+   teamName-- team [color = yellow];
+   teamOverall --team [color = yellow];
+   adjustedOverall -- injury [color = yellow];
+   injuryReplacement -- injury [color = yellow];
+   injuryID -- injury [color = yellow];
+   weeksInjured -- injury [color = yellow];
+   playerID -- player [color = yellow];
+   playerName -- player [color = yellow];
+   injuryStatus -- player [color = yellow];
+   interceptions -- playerStats [color = yellow];
+   tackles -- playerStats [color = yellow];
+   fumbleR -- playerStats [color = yellow];
+   passDeflection -- playerStats [color = yellow];
+   tackleForLoss -- playerStats [color = yellow];
+   pointsAgainst -- teamStats [color = yellow];
+   yardsAgainst -- teamStats [color = yellow];
+   passYardsPP -- teamStats [color = yellow];
+   rushYardsPP -- teamStats [color = yellow];
+   player -- "Has Stats" [color = yellow];
+   "Has Stats" -- playerStats [color = yellow];
+   player -- "Has Injury" [color = yellow];
+   "Has Injury" -- injury [color = yellow];
+   team -- "Belongs to Team" [color = yellow];
+   "Belongs to Team" -- player [color = yellow];
+   team -- "Has Team Stats" [color = yellow];
+   "Has Team Stats" -- teamStats [color = yellow];
 
 
+}
+
+```
+
+### 
